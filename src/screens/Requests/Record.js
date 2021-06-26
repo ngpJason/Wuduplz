@@ -7,7 +7,7 @@ import {  StyleSheet,
     ActivityIndicator,
     ProgressBarAndroid,
     Animated, } from 'react-native';
-import { RNCamera } from 'react-native-camera';
+import  {RNCamera}  from 'react-native-camera';
 import { LogLevel, RNFFmpeg } from 'react-native-ffmpeg';
 import socketIOClient from "socket.io-client";
 
@@ -149,7 +149,7 @@ class Record extends PureComponent {
                     style={styles.preview}
                     type={RNCamera.Constants.Type.back}
                     flashMode={RNCamera.Constants.FlashMode.on}
-                    faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
+                    //faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
                     androidCameraPermissionOptions={{
                         title: 'Permission to use camera',
                         message: 'We need your permission to use your camera',

@@ -19,8 +19,8 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8C30DC4D4F4583D553841B90 /* libPods-Wuduplz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4733D5A82476DF773F203863 /* libPods-Wuduplz.a */; };
 		94B31F44FF84AFA905548FC2 /* libPods-Wuduplz-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA27326B2FE97547872498D4 /* libPods-Wuduplz-tvOSTests.a */; };
+		C286F8F52686D21300F5A4A7 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = C286F8F42686D21200F5A4A7 /* bundle */; };
 		C2C50AE22684D42E0044CF63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2C50AE12684D42E0044CF63 /* GoogleService-Info.plist */; };
-		C2C50AE42684D5A00044CF63 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = C2C50AE32684D5A00044CF63 /* bundle */; };
 		CFDD000FEA9775F0D0C3183B /* libPods-Wuduplz-WuduplzTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E3D3ECD5256C84B94BC142 /* libPods-Wuduplz-WuduplzTests.a */; };
 /* End PBXBuildFile section */
 
@@ -78,8 +78,8 @@
 		A7801A154B684E1DB820E412 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		B64DC6A0019C4B10A6666157 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		C25A6062BE2C4AA09D1FD08C /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		C286F8F42686D21200F5A4A7 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		C2C50AE12684D42E0044CF63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C2C50AE32684D5A00044CF63 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		C2C50AE52684D7210044CF63 /* Wuduplz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Wuduplz.entitlements; path = Wuduplz/Wuduplz.entitlements; sourceTree = "<group>"; };
 		DA27326B2FE97547872498D4 /* libPods-Wuduplz-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wuduplz-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB52A82B8A888312BE388BB1 /* Pods-Wuduplz-WuduplzTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wuduplz-WuduplzTests.release.xcconfig"; path = "Target Support Files/Pods-Wuduplz-WuduplzTests/Pods-Wuduplz-WuduplzTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				C2C50AE32684D5A00044CF63 /* bundle */,
+				C286F8F42686D21200F5A4A7 /* bundle */,
 				C2C50AE12684D42E0044CF63 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* Wuduplz */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -392,7 +392,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2C50AE42684D5A00044CF63 /* bundle in Resources */,
+				C286F8F52686D21300F5A4A7 /* bundle in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				C2C50AE22684D42E0044CF63 /* GoogleService-Info.plist in Resources */,
