@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import {ScrollView, Text,
 	Image,View,TouchableOpacity,ActivityIndicator,
-	StyleSheet,RefreshControl,Button,FlatList,TextInput } from 'react-native';
+	StyleSheet,RefreshControl,Button,FlatList,TextInput,Alert} from 'react-native';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
@@ -61,7 +61,16 @@ const Requests = ({route, navigation,RootStore}) => {
         setRequest(bar.concat(result['data']));
     };
 
-
+	showAlert=(item)=>
+	{
+		Alert.alert('','If you want to delete this request?',
+ 	 	[
+    		{text:"Delete", onPress:()=>Delete(item)},
+    		{text:"Cancel",style:'cancel'}
+    		
+  		]
+	);
+	}
 
 	const Delete = async(item)=>{
 		var deletere = await request.get(`/front-end/deleteRequest/${item.RequestId}`)
@@ -238,10 +247,24 @@ const Requests = ({route, navigation,RootStore}) => {
 										}}
 										source={{uri:SERVER_ADDRESS+item.img}} /> */}
 									<View style={{
-										width: '50%'
+										width: '50%',
+										flexDirection: 'row',
+										alignItems: 'center',
+										justifyContent: 'center'
+
 									}}>
-										<Text style={{ fontWeight: 'bold' }}>{item.requestMessage}</Text>
-										<Text style={{ color: '#333' }}>{item.responseCount}</Text>
+										<TouchableOpacity style={{paddingRight:9}} onPress={() => {
+											showAlert(item)	
+											//Delete(item)
+											}} >
+											<FontAwesome5 name={'trash-alt'} size={22} color="pink" />
+										</TouchableOpacity>
+									
+										<View>
+											<Text style={{ fontWeight: 'bold' }}>{item.requestMessage}</Text>
+											<Text style={{ color: '#333' }}>{item.responseCount}</Text>
+									
+										</View>
 									</View>
 								
 										<View style={{
@@ -255,12 +278,8 @@ const Requests = ({route, navigation,RootStore}) => {
 											<TouchableOpacity onPress={() => {navigation.navigate("Responses", {responses:item.responses})}}>
 												<FontAwesome5 name={'chevron-right'} size={20} color="#E5E5E5" />
 											</TouchableOpacity>
-											<TouchableOpacity style={{paddingRight:9}} onPress={() => {
-												
-												Delete(item)
-												}} >
-												<FontAwesome5 name={'trash-alt'} size={22} color="pink" />
-											</TouchableOpacity>
+										
+											
 										</View>
 										{
 											index==0?<></>:
