@@ -63,7 +63,7 @@ const Requests = ({route, navigation,RootStore}) => {
 
 	showAlert=(item)=>
 	{
-		Alert.alert('','If you want to delete this request?',
+		Alert.alert('','Delete this request',
  	 	[
     		{text:"Delete", onPress:()=>Delete(item)},
     		{text:"Cancel",style:'cancel'}
