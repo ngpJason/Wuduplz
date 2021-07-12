@@ -74,6 +74,12 @@ const videoProcessing = async()=>{
   
     let command_compress = '-i ' +route.params.video_uri + 
     ' -c:v mpeg4 \''+route.params.compressed_uri;
+  
+    /*
+    let command_compress = '-i ' +route.params.video_uri + 
+    ' -c:v libx264 \''+route.params.compressed_uri;
+    */
+    //let command_compress = '-i ' +route.params.video_uri +' -c:v mpeg4 '+'-s 1920*1080 '+route.params.compressed_uri;
 
     await FFmpeg.Execute(command_compress,setTime)
     await deleteFile(route.params.video_uri)

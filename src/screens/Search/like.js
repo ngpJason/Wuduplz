@@ -73,7 +73,8 @@ const Favourite = ({route, navigation,RootStore}) => {
       
         <View style={{width:Dimensions.get('window').width}}>
 		<TextInput
-                    placeholder={search}
+                    //placeholder={search}
+                    placeholder="Search"
                     value={search}
                     placeHolderTextColor="#333"
                     style={{

@@ -53,7 +53,7 @@ const Search = ({navigation,RootStore }) => {
     useEffect(()=>{
         async function getData(){
             var result = await axios.get(`${SERVER_ADDRESS}/front-end/videoRecommendation/${RootStore.UserId}`)
-            
+            console.log(result)
             setData(result['data'])
         };
         getData()
@@ -142,6 +142,8 @@ const Search = ({navigation,RootStore }) => {
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                   }
                   onScroll={_onScroll}>
+                <View style={{flexDirection:"row",alignItems: 'center'}}>
+                <View style={{flex:6}}>
                 <TextInput
                     placeholder="Search"
                     placeHolderTextColor="#333"
@@ -160,7 +162,12 @@ const Search = ({navigation,RootStore }) => {
                         navigation.navigate("Results", {query: search});
                     }}
                 />
-                  
+                </View>
+                <View style={{flex:1,justifyContent:'center',alignItems: 'center'}}>
+                    <Text>1</Text>
+                </View>
+
+                </View>  
 
                
                 {Object.keys(data).map((categorie, k) => (
