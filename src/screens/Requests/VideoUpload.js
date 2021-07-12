@@ -66,20 +66,21 @@ const videoProcessing = async()=>{
   var jpg_uri =route.params.root_uri + '1.jpg'
   let date = new Date()
 
-   if(RNFS.exists(route.params.compressed_uri))
-          await deleteFile(route.params.compressed_uri)
-   if(RNFS.exists(jpg_uri))
-        await deleteFile(jpg_uri)
+    if(RNFS.exists(route.params.compressed_uri))
+      await deleteFile(route.params.compressed_uri)
+    if(RNFS.exists(jpg_uri))
+      await deleteFile(jpg_uri)
      
-  
+    /*  
     let command_compress = '-i ' +route.params.video_uri + 
     ' -c:v mpeg4 \''+route.params.compressed_uri;
-  
-    /*
-    let command_compress = '-i ' +route.params.video_uri + 
+    */
+    
+    /*let command_compress = '-i ' +route.params.video_uri + 
     ' -c:v libx264 \''+route.params.compressed_uri;
     */
-    //let command_compress = '-i ' +route.params.video_uri +' -c:v mpeg4 '+'-s 1920*1080 '+route.params.compressed_uri;
+    
+    let command_compress = '-i ' +route.params.video_uri +' -c:v mpeg4 '+'-s 1080*1920 '+route.params.compressed_uri;
 
     await FFmpeg.Execute(command_compress,setTime)
     await deleteFile(route.params.video_uri)
