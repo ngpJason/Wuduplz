@@ -31,7 +31,7 @@
     "react-native": "0.63.4",
     "react-native-camera": "^3.43.0",
     "react-native-elements": "^3.4.1",
-    "react-native-ffmpeg": "^0.4.3",
+    "react-native-ffmpeg": "^0.5.1",
     "react-native-flexi-radio-button": "^0.2.2",
     "react-native-fs": "^2.16.6",
     "react-native-geolocation-service": "^5.2.0",
