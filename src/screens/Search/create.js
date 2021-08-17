@@ -32,6 +32,7 @@ const Create = ({route, navigation,RootStore}) => {
     const type=['Sort by: Date','Sort by: Likes']
 	const [search, setSearch] = useState('');
 	const [videos,setVideos] = useState([])
+    const [vl,setVl] = useState([])
     //const bar = [{type:'input'},{type:'blank'}]
     const [y,setY] = React.useState(0)
     const [sortindex,setSortindex] = React.useState(0)
@@ -47,10 +48,9 @@ const Create = ({route, navigation,RootStore}) => {
 	const onRefresh = React.useCallback(async() => {
 		setRefreshing(true);
 		var result = await axios.get(`${SERVER_ADDRESS}/front-end/getCreatedVideo/${RootStore.UserId}`)
-
-
+        var r1 = await axios.get(`${SERVER_ADDRESS}/front-end/getLCreatedVideo/${RootStore.UserId}`)
 		setVideos(result['data'])
-
+        setVl(r1['data'])
 		setRefreshing(false)
 	  }, []);
 
@@ -59,8 +59,9 @@ const Create = ({route, navigation,RootStore}) => {
                     // do something
                     var result = await axios.get(SERVER_ADDRESS+`/front-end/getCreatedVideo/${RootStore.UserId}`)
                     //let start=[{type:'input'},{type:'blank'}]
+                    var r1 = await axios.get(`${SERVER_ADDRESS}/front-end/getLCreatedVideo/${RootStore.UserId}`)
                     setVideos(result['data'])
-                   
+                    setVl(r1['data'])
                    
             
                     /*
@@ -108,17 +109,11 @@ const Create = ({route, navigation,RootStore}) => {
         setSortindex(index)
         //console.log(data)
         //console.log(sortindex)
+        /*
         var arr=videos
         console.log(arr)
         if(index==0){
-            arr.sort((a,b)=>new Date(b.dat).getTime()-new Date(a.dat).getTime())
-            /*for(var i=0; i<videos.length-1; i++) {
-                if (videos[i].VideoId == videos[i+1].VideoId){
-                 videos.splice(i,1);
-                 i--;
-               }
-            }
-            */
+            arr.sort((a,b)=>new Date(b.dat).getTime()-new Date(a.dat).getTime())    
             var result=[]
             var m={}
             for(var i=0; i<arr.length-1; i++) {
@@ -131,7 +126,6 @@ const Create = ({route, navigation,RootStore}) => {
            //videos.filter((item,index)=>videos.indexOf(item.VideoId)===index)
             console.log(videos)
             
-        }
         if(index==1){
             arr.sort((c,d)=>d.likes-c.likes)
             var result=[]
@@ -146,6 +140,7 @@ const Create = ({route, navigation,RootStore}) => {
             //videos.filter((item,index)=>videos.indexOf(item.VideoId)===index)
             console.log(videos)
         }
+        */
     }
     // 下拉列表分隔符
     _separator = () => {
@@ -301,6 +296,7 @@ const Create = ({route, navigation,RootStore}) => {
 
                 </View>
                 </View>
+                {sortindex==0?
                 <View style={{
                 flex: 1,
                 display: 'flex',
@@ -314,7 +310,21 @@ const Create = ({route, navigation,RootStore}) => {
 
                 />
                 </View>
-               
+                :
+                <View style={{
+                    flex: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    }}>   
+                    <FlatList
+                        data = {vl}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={renderItem}
+                        numColumns={numColumns}
+    
+                    />
+                    </View>
+               }
             </ScrollView>       
         </Container>
 	)

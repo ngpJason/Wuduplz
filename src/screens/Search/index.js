@@ -40,10 +40,13 @@ const Search = ({navigation,RootStore }) => {
     const [refreshing, setRefreshing] = React.useState(false);
 	const onRefresh = React.useCallback(async() => {
 		setRefreshing(true);
-		var result = await axios.get(`${SERVER_ADDRESS}/front-end/videoRecommendation/${RootStore.UserId}`)
-
-
-		setData(result['data'])
+        var result = await axios.get(`${SERVER_ADDRESS}/front-end/videoRecommendation/${RootStore.UserId}`)
+        var r1 = await axios.get(`${SERVER_ADDRESS}/front-end/getAllVideo/${RootStore.UserId}`)
+        var r2 = await axios.get(`${SERVER_ADDRESS}/front-end/getAllTVideo/${RootStore.UserId}`) 
+        //console.log(result['data'])
+        setData(result['data'])
+        setVideos(r1['data'])
+        setVt(r2['data'])
 
 		setRefreshing(false)
 	  }, []);
@@ -53,15 +56,21 @@ const Search = ({navigation,RootStore }) => {
     const [categories,setCategories] = useState([])
     const [data, setData] = useState({})
     const [svideos,setSvideos] = useState([])
-
+    const [vt,setVt] = useState([])
+    
+    
    
 
 
     useEffect(()=>{
         async function getData(){
             var result = await axios.get(`${SERVER_ADDRESS}/front-end/videoRecommendation/${RootStore.UserId}`)
+            var r1 = await axios.get(`${SERVER_ADDRESS}/front-end/getAllVideo/${RootStore.UserId}`)
+            var r2 = await axios.get(`${SERVER_ADDRESS}/front-end/getAllTVideo/${RootStore.UserId}`) 
             //console.log(result['data'])
             setData(result['data'])
+            setVideos(r1['data'])
+            setVt(r2['data'])
         };
         getData()
     },[])
@@ -140,7 +149,7 @@ const Search = ({navigation,RootStore }) => {
             return param
     }
     // 分类选择
-    _selectType = (index,value) => {
+    _selectType = async(index,value) => {
         console.log(index + '--' + value)
         /*this.setState({
             statusShow: false,
@@ -148,28 +157,10 @@ const Search = ({navigation,RootStore }) => {
         })
         */
         setSortindex(index)
-        //console.log(data)
-        //console.log(sortindex)
-        var arr=Object.keys(data)
-        setCategories(arr)
-        console.log(arr)
-        arr.forEach((v,i)=>{
-            data[v].forEach((s,j)=>{
-                videos.push(s)
-
-            })
-            
-        })
-        console.log(videos)
+        
         if(index==0){
+            /*
             videos.sort((a,b)=>new Date(b.dat).getTime()-new Date(a.dat).getTime())
-            /*for(var i=0; i<videos.length-1; i++) {
-                if (videos[i].VideoId == videos[i+1].VideoId){
-                 videos.splice(i,1);
-                 i--;
-               }
-            }
-            */
             var result=[]
             var m={}
             for(var i=0; i<videos.length-1; i++) {
@@ -178,24 +169,26 @@ const Search = ({navigation,RootStore }) => {
                     result.push(videos[i])
                 }
             }
-            setSvideos(result)
-           //videos.filter((item,index)=>videos.indexOf(item.VideoId)===index)
-            console.log(svideos)
-            
+        */   
+            setSvideos(vt)     
         }
         if(index==1){
+            /*
             videos.sort((c,d)=>d.likes-c.likes)
             var result=[]
             var h={}
-            for(var j=0; j<videos.length-1; j++) {
-                if (!h[videos[j].VideoId]){
-                    h[videos[j].VideoId]=true
-                    result.push(videos[j])
-               }
+            for(var i=0; i<videos.length-1; i++) {
+                if (!h[videos[i].VideoId]){
+                    h[videos[i].VideoId]=true
+                    result.push(videos[i])
+                }
             }
             setSvideos(result)
-            //videos.filter((item,index)=>videos.indexOf(item.VideoId)===index)
             console.log(svideos)
+            */
+            //var r1 = await axios.get(`${SERVER_ADDRESS}/front-end/getAllVideo/${RootStore.UserId}`)
+            setSvideos(videos) 
+        
         }
     }
     // 下拉列表分隔符
