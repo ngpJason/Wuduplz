@@ -212,7 +212,7 @@ const Create = ({route, navigation,RootStore}) => {
 
 
 
-    const renderItem = ({ item, index }) => {
+    const renderItem = ({ item }) => {
 
         
   

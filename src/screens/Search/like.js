@@ -195,7 +195,7 @@ const Favourite = ({route, navigation,RootStore}) => {
 	}
 
 
-    const renderItem = ({ item, index }) => {
+    const renderItem = ({ item }) => {
 
         var priva = RootStore.membership>0||RootStore.UserId==item.creator_id?1:item.private
 
