@@ -99,7 +99,7 @@ const Create = ({route, navigation,RootStore}) => {
             return param
     }
 
-    _selectType = (index,value) => {
+    const _selectType = (index,value) => {
         console.log(index + '--' + value)
         /*this.setState({
             statusShow: false,
@@ -143,22 +143,22 @@ const Create = ({route, navigation,RootStore}) => {
         */
     }
     // 下拉列表分隔符
-    _separator = () => {
+    const _separator = () => {
         return(
             <Text style={{height:0}}></Text>
         )
     }
     // 状态选择下拉框位置
-    _adjustStatus = () => {
+    const _adjustStatus = () => {
         return({
             right: width / 3,
             top: 99,
         })
     }
     // 分类选择下拉框位置
-    _adjustType = () => {
+    const _adjustType = () => {
         return({
-            right: 0,
+            right: 22,
             top: 99,
         })
     }
@@ -174,7 +174,7 @@ const Create = ({route, navigation,RootStore}) => {
                     value={search}
                     placeHolderTextColor="#333"
                     style={{
-                        flex: 1,
+                        //flex: 1,
                         marginTop: 10,
                         marginBottom: 5,
                         paddingHorizontal: 15,
@@ -208,6 +208,67 @@ const Create = ({route, navigation,RootStore}) => {
 
 		)
 	}
+
+    const _createListHeader=()=>{
+        return (
+            <View style={{flexDirection:"row",alignItems: 'center'}}>
+                <View style={{flex:3,justifyContent:'center',alignItems: 'center'}}>
+                <TextInput
+                    //placeholder={search}
+                    placeholder="Search"
+                    value={search}
+                    placeHolderTextColor="#333"
+                    style={{
+                        //flex: 1,
+                        marginTop: 10,
+                        marginBottom: 5,
+                        paddingHorizontal: 15,
+                        alignSelf: 'stretch',
+                        width: StyleSheet.hairLineWidth,
+                        backgroundColor: '#F5F5F5'
+                    }}
+                    onChangeText={(text) => setSearch(text)}
+                    onSubmitEditing={async() => {
+                        if(search==''){
+                            let start=[]
+                            //let start=[{type:'input'},{type:'blank'}]
+                            setVideos(start.concat(cache[0]))
+                        }else{
+                            let start=[]
+                            //let start=[{type:'input'},{type:'blank'}]
+                            setVideos(start.concat(cache[0].filter((value)=>{
+                                
+                                return value.name.includes(search)
+                            }))
+                            )
+                        }
+                     
+                        // var result = await axios.get(SERVER_ADDRESS+`/front-end/searchVideos/${search}`)
+                        // setVideos(bar.concat(result['data']))
+                    }}
+                />
+                </View>
+                <View style={{flex:1,justifyContent:'center',alignItems: 'center'}}>
+                    <ModalDropdown
+                        options={type}    //下拉内容数组
+                        //style={styles.modal}    //按钮样式
+                        dropdownStyle={[{height:32*type.length}]}    //下拉框样式
+                       // dropdownTextStyle={styles.dropdownText}    //下拉框文本样式
+                        renderSeparator={_separator}    //下拉框文本分隔样式
+                        adjustFrame={_adjustType}    //下拉框位置
+                        dropdownTextHighlightStyle={{color:'rgba(42, 130, 228, 1)'}}    //下拉框选中颜色
+                        //onDropdownWillShow={() => setTypeShow(false)}   //按下按钮显示按钮时触发 
+                        //onDropdownWillHide={() => setTypeShow(false)}    //当下拉按钮通过触摸按钮隐藏时触发
+                        onSelect={_selectType}    //当选项行与选定的index 和 value 接触时触发
+                        defaultValue={'Sort by: Likes'}
+                    >   
+                    </ModalDropdown>
+                </View>
+
+                </View>
+
+        )
+    }
 
 
 
@@ -266,36 +327,8 @@ const Create = ({route, navigation,RootStore}) => {
 
 	return (
 		<Container> 
-            <ScrollView style={{paddingHorizontal: 15}}
-            	refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                  }
-                  onScroll={_onScroll}>
-                <View style={{flexDirection:"row",alignItems: 'center'}}>
-                <View style={{flex:3}}>
-                {Input()}
-                </View>
-                <View style={{flex:1,justifyContent:'center',alignItems: 'center'}}>
-                    <ModalDropdown
-                        options={type}    //下拉内容数组
-                        //style={styles.modal}    //按钮样式
-                        //dropdownStyle={[styles.dropdown,{height:32*type.length}]}    //下拉框样式
-                       // dropdownTextStyle={styles.dropdownText}    //下拉框文本样式
-                        renderSeparator={this._separator}    //下拉框文本分隔样式
-                        adjustFrame={this._adjustType}    //下拉框位置
-                        dropdownTextHighlightStyle={{color:'rgba(42, 130, 228, 1)'}}    //下拉框选中颜色
-                        //onDropdownWillShow={() => setTypeShow(false)}   //按下按钮显示按钮时触发 
-                        //onDropdownWillHide={() => setTypeShow(false)}    //当下拉按钮通过触摸按钮隐藏时触发
-                        onSelect={this._selectType}    //当选项行与选定的index 和 value 接触时触发
-                        defaultValue={'Sort by: Date'}
-                    >
-                      
-                       
-                    </ModalDropdown>
- 
-
-                </View>
-                </View>
+            <View style={{paddingHorizontal: 15}}>
+              
                 {sortindex==0?
                 <View style={{
                 flex: 1,
@@ -307,6 +340,7 @@ const Create = ({route, navigation,RootStore}) => {
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={renderItem}
                     numColumns={numColumns}
+                    ListHeaderComponent={_createListHeader}
 
                 />
                 </View>
@@ -321,11 +355,11 @@ const Create = ({route, navigation,RootStore}) => {
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={renderItem}
                         numColumns={numColumns}
-    
+                        ListHeaderComponent={_createListHeader}
                     />
                     </View>
                }
-            </ScrollView>       
+            </View>       
         </Container>
 	)
 }

@@ -71,6 +71,38 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
         setRequest(result['data']);
     };
 
+    const showAlert=(response_id)=>
+	{
+		Alert.alert('','Delete this response',
+ 	 	[
+    		{text:"Delete", onPress:()=>deleteResponse(response_id)},
+    		{text:"Cancel",style:'cancel'}
+    		
+  		]
+	);
+	}
+
+    const _createListHeader=()=>{
+        return (
+            <TextInput
+            placeholder="Search"
+            placeHolderTextColor="#333"
+            value={search}
+            style={{
+                //flex: 1,
+                marginTop: 20,
+                marginBottom: 5,
+                paddingHorizontal: 15,
+                alignSelf: 'stretch',
+                width: StyleSheet.hairLineWidth,
+                backgroundColor: '#F5F5F5'
+            }}
+            onChangeText={(text) => setSearch(text)}
+            onSubmitEditing={updateResults}
+        />
+        )
+    }
+
     const deleteResponse = async(response_id)=>{
         var result = await axios.get(`${SERVER_ADDRESS}/front-end/deleteResponse/${response_id}`)
         var result = await axios.get(`${SERVER_ADDRESS}/front-end/getResponses/${RootStore.UserId}/null/null`)
@@ -106,18 +138,16 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
 
     return (
         <Container>
-            <ScrollView style={{paddingHorizontal: 10, margin: 5}}
-            	refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                  }>
+            <View style={{paddingHorizontal: 10,flex:1}}>
                 {/*<View style={{marginTop: 15, marginBottom: 5}}>*/}
                 {/*    <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold', marginLeft: 7}}>Requests for you!</Text>*/}
                 {/*</View>*/}
-                <TextInput
+                {/*<TextInput
                     placeholder="Search"
                     placeHolderTextColor="#333"
                     value={search}
                     style={{
-                        flex: 1,
+                        //flex: 1,
                         marginTop: 20,
                         marginBottom: 5,
                         paddingHorizontal: 15,
@@ -128,7 +158,9 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
                     onChangeText={(text) => setSearch(text)}
                     onSubmitEditing={updateResults}
                 />
+                */}
                <FlatList
+                ListHeaderComponent={_createListHeader}
                 data = {requests}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item})=>{
@@ -151,11 +183,16 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
                         {/*        borderColor: '#333',*/}
                         {/*    }}*/}
                         {/*    source={{ uri: request.img }} />*/}
+                        <TouchableOpacity style={{
+                            }} onPress={() => {showAlert(item.response_id)}} >
+                                <FontAwesome5 name={'trash-alt'} size={22} color="pink" />
+                            </TouchableOpacity>
                         <View style={{
                             width: '75%',
                             paddingLeft: 5,
                         }}>
                             <View style={{marginLeft: 0, paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center', width: '60%'}}>
+                           
                                 <Image
                                     style={{borderColor: '#EEE', borderRadius: 25, width: 46, height: 46}}
                                     source={{uri:item.user_image?SERVER_ADDRESS+item.user_image.split('|').join('//'):''}}
@@ -183,11 +220,6 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
                             })}} >
                                 <FontAwesome5 name={'video'} size={25} color="pink" />
                             </TouchableOpacity>
-                            <TouchableOpacity style={{
-                            }} onPress={() => {deleteResponse(item.response_id)}} >
-                                <FontAwesome5 name={'ban'} size={22} color="grey" />
-                            </TouchableOpacity>
-                     
                         </View>
                     </View>
                     )
@@ -196,7 +228,7 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
                          
                />
 
-            </ScrollView>
+            </View>
         </Container>
     )
 }

@@ -61,7 +61,7 @@ const Requests = ({route, navigation,RootStore}) => {
         setRequest(bar.concat(result['data']));
     };
 
-	showAlert=(item)=>
+	const showAlert=(item)=>
 	{
 		Alert.alert('','Delete this request',
  	 	[
@@ -213,7 +213,7 @@ const Requests = ({route, navigation,RootStore}) => {
 	return (
 
 		
-			<View style={{paddingHorizontal: 15}}>
+			<View style={{paddingHorizontal: 15,flex:1}}>
 			
 				<FlatList
 				refreshing={refreshing} 
