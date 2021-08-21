@@ -211,7 +211,7 @@ const Create = ({route, navigation,RootStore}) => {
 
     const _createListHeader=()=>{
         return (
-            <View style={{flexDirection:"row",alignItems: 'center'}}>
+            <View style={{flexDirection:"row",alignItems: 'center',height:50}}>
                 <View style={{flex:3,justifyContent:'center',alignItems: 'center'}}>
                 <TextInput
                     //placeholder={search}
@@ -260,7 +260,7 @@ const Create = ({route, navigation,RootStore}) => {
                         //onDropdownWillShow={() => setTypeShow(false)}   //按下按钮显示按钮时触发 
                         //onDropdownWillHide={() => setTypeShow(false)}    //当下拉按钮通过触摸按钮隐藏时触发
                         onSelect={_selectType}    //当选项行与选定的index 和 value 接触时触发
-                        defaultValue={'Sort by: Likes'}
+                        defaultValue={'Sort by: Date'}
                     >   
                     </ModalDropdown>
                 </View>
@@ -343,7 +343,7 @@ const Create = ({route, navigation,RootStore}) => {
                     ListHeaderComponent={_createListHeader}
                     onScrollToIndexFailed={()=>{}}
                     getItemLayout={(data, index) => (
-                        {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2+1), index}
+                        {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2)+50, index}
                       )}
 
                 />
@@ -362,7 +362,7 @@ const Create = ({route, navigation,RootStore}) => {
                         ListHeaderComponent={_createListHeader}
                         onScrollToIndexFailed={()=>{}}
                         getItemLayout={(data, index) => (
-                            {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2+1), index}
+                            {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2)+50, index}
                           )}
                     />
                     </View>

@@ -221,7 +221,7 @@ const Search = ({navigation,RootStore }) => {
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                   }
                   onScroll={_onScroll}>
-                <View style={{flexDirection:"row",alignItems: 'center'}}>
+                <View style={{flexDirection:"row",alignItems: 'center',heighr:50}}>
                 <View style={{flex:3}}>
                 <TextInput
                     placeholder="Search"
@@ -388,7 +388,7 @@ const Search = ({navigation,RootStore }) => {
             numColumns={numColumns}
             onScrollToIndexFailed={()=>{}}
             getItemLayout={(data, index) => (
-                {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2+1), index}
+                {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2)+50, index}
               )}
            >
              

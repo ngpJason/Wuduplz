@@ -196,7 +196,7 @@ const Favourite = ({route, navigation,RootStore}) => {
 
     const _createListHeader=()=>{
         return (
-            <View style={{flexDirection:"row",alignItems: 'center'}}>
+            <View style={{flexDirection:"row",alignItems: 'center',height:50}}>
                 <View style={{flex:3,justifyContent:'center',alignItems: 'center'}}>
                 <TextInput
                     //placeholder={search}
@@ -323,6 +323,9 @@ const Favourite = ({route, navigation,RootStore}) => {
                     numColumns={numColumns}
                     ListHeaderComponent={_createListHeader}
                     onScrollToIndexFailed={()=>{}}
+                    getItemLayout={(data, index) => (
+                        {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2)+50, index}
+                      )}
                 />
                 </View>
                 :
@@ -338,7 +341,9 @@ const Favourite = ({route, navigation,RootStore}) => {
                         renderItem={renderItem}
                         numColumns={numColumns}
                         onScrollToIndexFailed={()=>{}}
-                       
+                        getItemLayout={(data, index) => (
+                            {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2)+50, index}
+                          )}
                     />
                     </View>
                 }     
