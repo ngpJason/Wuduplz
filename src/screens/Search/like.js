@@ -88,7 +88,7 @@ const Favourite = ({route, navigation,RootStore}) => {
             return param
     }
 
-    const _selectType = (index,value) => {
+    const _selectType =async (index,value) => {
         console.log(index + '--' + value)
         /*this.setState({
             statusShow: false,
@@ -234,7 +234,7 @@ const Favourite = ({route, navigation,RootStore}) => {
                     <ModalDropdown
                         options={type}    //下拉内容数组
                         //style={styles.modal}    //按钮样式
-                        dropdownStyle={[{height:32*type.length}]}    //下拉框样式
+                        //dropdownStyle={[{height:32*type.length}]}    //下拉框样式
                        // dropdownTextStyle={styles.dropdownText}    //下拉框文本样式
                         //renderSeparator={_separator}    //下拉框文本分隔样式
                         adjustFrame={_adjustType}    //下拉框位置
@@ -296,10 +296,11 @@ const Favourite = ({route, navigation,RootStore}) => {
                 <Text style={{  color:'white', fontSize: 10, fontWeight: 'bold', opacity: 0.8}}>{convertViews(item.likes)}</Text>
             </View>
             */
-                 }
+            }
+            </>
             
                  
-            </>
+            
     
             </ImageBackground>
           </TouchableHighlight>
@@ -310,6 +311,29 @@ const Favourite = ({route, navigation,RootStore}) => {
 	return (
 		<Container>
              <View style={{paddingHorizontal: 15}}>
+             <View style={{flexDirection:"row",alignItems: 'center',height:50}}>
+                <View style={{flex:3,justifyContent:'center',alignItems: 'center'}}>
+                {Input()}               
+                </View>
+                <View style={{flex:1,justifyContent:'center',alignItems: 'center'}}>
+                    <ModalDropdown
+                        options={type}    //下拉内容数组
+                        //style={styles.modal}    //按钮样式
+                        dropdownStyle={[{height:32*type.length}]}    //下拉框样式
+                       // dropdownTextStyle={styles.dropdownText}    //下拉框文本样式
+                        //renderSeparator={_separator}    //下拉框文本分隔样式
+                        adjustFrame={_adjustType}    //下拉框位置
+                        dropdownTextHighlightStyle={{color:'rgba(42, 130, 228, 1)'}}    //下拉框选中颜色
+                        //onDropdownWillShow={() => setTypeShow(false)}   //按下按钮显示按钮时触发 
+                        //onDropdownWillHide={() => setTypeShow(false)}    //当下拉按钮通过触摸按钮隐藏时触发
+                        onSelect={_selectType}    //当选项行与选定的index 和 value 接触时触发
+                        defaultValue={'Sort by: Likes'}
+                    >   
+                    </ModalDropdown>
+                </View>
+
+                </View>
+
                 {sortindex==0?
                 <View style={{
                 flex: 1,
@@ -321,10 +345,10 @@ const Favourite = ({route, navigation,RootStore}) => {
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={renderItem}
                     numColumns={numColumns}
-                    ListHeaderComponent={_createListHeader}
+                    //ListHeaderComponent={_createListHeader}
                     onScrollToIndexFailed={()=>{}}
                     getItemLayout={(data, index) => (
-                        {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2)+50, index}
+                        {length: ((Dimensions.get('window').width) / 2)*1.2+1, offset: (((Dimensions.get('window').width) / 2)*1.2+1)* (index/2)+50, index}
                       )}
                 />
                 </View>
@@ -335,14 +359,14 @@ const Favourite = ({route, navigation,RootStore}) => {
                     alignItems: 'center',
                     }}>
                     <FlatList
-                        ListHeaderComponent={_createListHeader}
+                        //ListHeaderComponent={_createListHeader}
                         data = {videos}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={renderItem}
                         numColumns={numColumns}
                         onScrollToIndexFailed={()=>{}}
                         getItemLayout={(data, index) => (
-                            {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2)+50, index}
+                            {length: ((Dimensions.get('window').width) / 2)*1.2+1, offset:(((Dimensions.get('window').width) / 2)*1.2+1) * Math.floor(index/2), index}
                           )}
                     />
                     </View>

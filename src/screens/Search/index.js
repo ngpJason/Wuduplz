@@ -246,8 +246,8 @@ const Search = ({navigation,RootStore }) => {
                     <ModalDropdown
                         options={type}    //下拉内容数组
                         //style={styles.modal}    //按钮样式
-                        dropdownStyle={[{height:32*type.length}]}    //下拉框样式
-                        //dropdownTextStyle={{fontSize:15}}    //下拉框文本样式
+                        //dropdownStyle={[{height:32*type.length}]}    //下拉框样式
+                        dropdownTextStyle={{fontSize:15}}    //下拉框文本样式
                         renderSeparator={_separator}    //下拉框文本分隔样式
                         adjustFrame={_adjustType}    //下拉框位置
                         dropdownTextHighlightStyle={{color:'rgba(42, 130, 228, 1)'}}    //下拉框选中颜色
