@@ -74,6 +74,7 @@ const Favourite = ({route, navigation,RootStore}) => {
     useEffect(()=>{
         const unsubscribe = navigation.addListener('blur', async() => {
             setVideos([])
+            setVt([])
         });
 
         return unsubscribe
@@ -174,7 +175,7 @@ const Favourite = ({route, navigation,RootStore}) => {
                     onChangeText={(text) => setSearch(text)}
                     onSubmitEditing={async() => {
                         if(search==''){
-                            //let start=[]
+                            let start=[]
                             //let start=[{type:'input'},{type:'blank'}]
                             setVideos(start.concat(cache[0]))
                         }else{

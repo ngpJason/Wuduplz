@@ -62,6 +62,8 @@ const Create = ({route, navigation,RootStore}) => {
                     var r1 = await axios.get(`${SERVER_ADDRESS}/front-end/getLCreatedVideo/${RootStore.UserId}`)
                     setVideos(result['data'])
                     setVl(r1['data'])
+                    cache.push(result['data'])
+                    console.log(result['data'])
                    
             
                     /*
@@ -83,6 +85,7 @@ const Create = ({route, navigation,RootStore}) => {
     useEffect(()=>{
         const unsubscribe = navigation.addListener('blur', async() => {
             setVideos([])
+            setVl([])
         });
 
         return unsubscribe
