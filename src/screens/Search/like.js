@@ -348,7 +348,7 @@ const Favourite = ({route, navigation,RootStore}) => {
                     //ListHeaderComponent={_createListHeader}
                     onScrollToIndexFailed={()=>{}}
                     getItemLayout={(data, index) => (
-                        {length: ((Dimensions.get('window').width) / 2)*1.2+1, offset: (((Dimensions.get('window').width) / 2)*1.2+1)* (index/2)+50, index}
+                        {length: ((Dimensions.get('window').width) / 2)*1.2+1, offset: (((Dimensions.get('window').width) / 2)*1.2+1)* Math.floor(index/2), index}
                       )}
                 />
                 </View>

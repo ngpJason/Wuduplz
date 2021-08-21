@@ -213,40 +213,7 @@ const Create = ({route, navigation,RootStore}) => {
         return (
             <View style={{flexDirection:"row",alignItems: 'center',height:50}}>
                 <View style={{flex:3,justifyContent:'center',alignItems: 'center'}}>
-                <TextInput
-                    //placeholder={search}
-                    placeholder="Search"
-                    value={search}
-                    placeHolderTextColor="#333"
-                    style={{
-                        //flex: 1,
-                        marginTop: 10,
-                        marginBottom: 5,
-                        paddingHorizontal: 15,
-                        alignSelf: 'stretch',
-                        width: StyleSheet.hairLineWidth,
-                        backgroundColor: '#F5F5F5'
-                    }}
-                    onChangeText={(text) => setSearch(text)}
-                    onSubmitEditing={async() => {
-                        if(search==''){
-                            let start=[]
-                            //let start=[{type:'input'},{type:'blank'}]
-                            setVideos(start.concat(cache[0]))
-                        }else{
-                            let start=[]
-                            //let start=[{type:'input'},{type:'blank'}]
-                            setVideos(start.concat(cache[0].filter((value)=>{
-                                
-                                return value.name.includes(search)
-                            }))
-                            )
-                        }
-                     
-                        // var result = await axios.get(SERVER_ADDRESS+`/front-end/searchVideos/${search}`)
-                        // setVideos(bar.concat(result['data']))
-                    }}
-                />
+                {Input()}
                 </View>
                 <View style={{flex:1,justifyContent:'center',alignItems: 'center'}}>
                     <ModalDropdown
@@ -349,7 +316,7 @@ const Create = ({route, navigation,RootStore}) => {
                     </ModalDropdown>
                 </View>
 
-            </View>    
+            </View>   
                 {sortindex==0?
                 <View style={{
                 flex: 1,
@@ -383,7 +350,7 @@ const Create = ({route, navigation,RootStore}) => {
                         //ListHeaderComponent={_createListHeader}
                         onScrollToIndexFailed={()=>{}}
                         getItemLayout={(data, index) => (
-                            {length: ((Dimensions.get('window').width) / 2)*1.2+1, offset:(((Dimensions.get('window').width) / 2)*1.2+1) * Math.floor(index/2)+50, index}
+                            {length: ((Dimensions.get('window').width) / 2)*1.2+1, offset:(((Dimensions.get('window').width) / 2)*1.2+1) * Math.floor(index/2), index}
                           )}
                     />
                     </View>
