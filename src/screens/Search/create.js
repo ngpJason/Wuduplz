@@ -341,6 +341,10 @@ const Create = ({route, navigation,RootStore}) => {
                     renderItem={renderItem}
                     numColumns={numColumns}
                     ListHeaderComponent={_createListHeader}
+                    onScrollToIndexFailed={()=>{}}
+                    getItemLayout={(data, index) => (
+                        {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2+1), index}
+                      )}
 
                 />
                 </View>
@@ -356,6 +360,10 @@ const Create = ({route, navigation,RootStore}) => {
                         renderItem={renderItem}
                         numColumns={numColumns}
                         ListHeaderComponent={_createListHeader}
+                        onScrollToIndexFailed={()=>{}}
+                        getItemLayout={(data, index) => (
+                            {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2+1), index}
+                          )}
                     />
                     </View>
                }

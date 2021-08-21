@@ -322,6 +322,7 @@ const Favourite = ({route, navigation,RootStore}) => {
                     renderItem={renderItem}
                     numColumns={numColumns}
                     ListHeaderComponent={_createListHeader}
+                    onScrollToIndexFailed={()=>{}}
                 />
                 </View>
                 :
@@ -336,6 +337,7 @@ const Favourite = ({route, navigation,RootStore}) => {
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={renderItem}
                         numColumns={numColumns}
+                        onScrollToIndexFailed={()=>{}}
                        
                     />
                     </View>

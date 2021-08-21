@@ -386,6 +386,10 @@ const Search = ({navigation,RootStore }) => {
             }
             }
             numColumns={numColumns}
+            onScrollToIndexFailed={()=>{}}
+            getItemLayout={(data, index) => (
+                {length: ((Dimensions.get('window').width) / 2)*1.2, offset: ((Dimensions.get('window').width) / 2)*1.2 * (index/2+1), index}
+              )}
            >
              
            </FlatList>
