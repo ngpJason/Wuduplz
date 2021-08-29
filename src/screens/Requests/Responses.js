@@ -57,7 +57,7 @@ const Responses = ({route, navigation}) => {
                     <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold', marginLeft: 7}}>Responses</Text>
                 </View>
                 {responses.map((request, key) => (
-                    <Swipeout right={swipeoutBtns}>
+                    <Swipeout>
                     <TouchableOpacity style={{
                         display: 'flex',
                         flexDirection: 'row',
@@ -85,7 +85,7 @@ const Responses = ({route, navigation}) => {
                             alignItems: 'center',
                             justifyContent: 'center',
                         }}>
-                            <FontAwesome5 name={'play'} size={20} color="#E5E5E5" />
+                            <Image style={{width:66,height:88,borderColor: '#333'}} source={{ uri: SERVER_ADDRESS+request.video_image.split('|').join('//')}}/>
                         </View>
                     </TouchableOpacity>
                     </Swipeout>

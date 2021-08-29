@@ -179,8 +179,8 @@ const Requests = ({route, navigation,RootStore}) => {
 				return (
 					<View style={{
 						position:"absolute",
-						top:5,
-						left:5
+						top:7,
+						right:11
 					}}>
 						<Image
 						style={{
@@ -267,32 +267,16 @@ const Requests = ({route, navigation,RootStore}) => {
 										</View>
 									</View>
 								
-										<View style={{
-											width: '18%',
-											display: 'flex',
-											flexDirection: 'row',
-											alignItems: 'center',
-											justifyContent: 'space-between',
-											left:'0%'
-										}}>
-											<TouchableOpacity onPress={() => {navigation.navigate("Responses", {responses:item.responses})}}>
-												<FontAwesome5 name={'chevron-right'} size={20} color="#E5E5E5" />
-											</TouchableOpacity>
 										
-											
-										</View>
 										{
 											index==0?<></>:
 											item.responses.length==0?	
-											<Image
-												style={{
-													width: 66,
-													height: 88,
-													//borderRadius: 50,
-													borderColor: '#333',
-												}}
-												source={{uri:SERVER_ADDRESS+item.img}} />:
-												videoImages(item.responses.length,item)
+											<></>
+											:
+											<TouchableOpacity onPress={() => {navigation.navigate("Responses", {responses:item.responses})}}>
+												{videoImages(item.responses.length,item)}
+											</TouchableOpacity>
+												
 												
 											
 

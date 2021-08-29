@@ -7,18 +7,20 @@ import {SERVER_ADDRESS} from '../../../data/address'
 import {inject,observer } from "mobx-react";
 import axios from 'axios';
 import messaging from '@react-native-firebase/messaging';
-
+import ModalDropdown from 'react-native-modal-dropdown';
 
 const RequestsForYou = ({route, navigation,RootStore }) => {
 
+    const type=['Sort by: Date','Sort by: Likes','Sort by: Key words']
     const [refreshing, setRefreshing] = React.useState(false);
     const [time,setTime] = useState(Date.now())
     const [search, setSearch] = useState('');
+    const bar = [{type:'bar'}]
     const onRefresh = React.useCallback(async() => {
 		setRefreshing(true);
         var result = await axios.get(`${SERVER_ADDRESS}/front-end/getResponses/${RootStore.UserId}/null/null`)
         
-        setRequest(result['data'])
+        setRequest(bar.concat(result['data']))
 
 		setRefreshing(false)
 	  }, []);
@@ -30,7 +32,7 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
 
 			if(remoteMessage["data"]["request"]){
                 var result = await axios.get(`${SERVER_ADDRESS}/front-end/getResponses/${RootStore.UserId}/null/null`)
-                setRequest(result['data'])
+                setRequest(bar.concat(result['data']))
 			}
         })
 	  
@@ -68,7 +70,7 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
             result = await axios.get(`${SERVER_ADDRESS}/front-end/getResponses/${RootStore.UserId}/null/null`)
         else
             result = await axios.get(`${SERVER_ADDRESS}/front-end/getResponses/search/${RootStore.UserId}/${search}`)
-        setRequest(result['data']);
+        setRequest(bar.concat(result['data']));
     };
 
     const showAlert=(response_id)=>
@@ -82,31 +84,11 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
 	);
 	}
 
-    const _createListHeader=()=>{
-        return (
-            <TextInput
-            placeholder="Search"
-            placeHolderTextColor="#333"
-            value={search}
-            style={{
-                //flex: 1,
-                marginTop: 20,
-                marginBottom: 5,
-                paddingHorizontal: 15,
-                alignSelf: 'stretch',
-                width: StyleSheet.hairLineWidth,
-                backgroundColor: '#F5F5F5'
-            }}
-            onChangeText={(text) => setSearch(text)}
-            onSubmitEditing={updateResults}
-        />
-        )
-    }
 
     const deleteResponse = async(response_id)=>{
         var result = await axios.get(`${SERVER_ADDRESS}/front-end/deleteResponse/${response_id}`)
         var result = await axios.get(`${SERVER_ADDRESS}/front-end/getResponses/${RootStore.UserId}/null/null`)
-        setRequest(result['data'])
+        setRequest(bar.concat(result['data']))
     }
     
     useEffect(()=>{
@@ -114,7 +96,7 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
             
             var result = await axios.get(`${SERVER_ADDRESS}/front-end/getResponses/${RootStore.UserId}/null/null`)
             console.log('RequestsForYou.js data is ',result['data'][0])
-            setRequest(result['data'])
+            setRequest(bar.concat(result['data']))
         };
 
         getData()
@@ -125,7 +107,7 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
 		const unsubscribe = messaging().onMessage(async remoteMessage => {
 		    //Alert.alert('Request For you!', JSON.stringify(remoteMessage));
             var result = await axios.get(`${SERVER_ADDRESS}/front-end/getResponses/${RootStore.UserId}`)
-            setRequest(result['data'])
+            setRequest(bar.concat(result['data']))
         
 		})
 
@@ -133,16 +115,9 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
 
 	  }, []);
 
-
- 
-
-    return (
-        <Container>
-            <View style={{paddingHorizontal: 10,flex:1}}>
-                {/*<View style={{marginTop: 15, marginBottom: 5}}>*/}
-                {/*    <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold', marginLeft: 7}}>Requests for you!</Text>*/}
-                {/*</View>*/}
-                {/*<TextInput
+    const Input=()=>{
+        return(
+            <TextInput
                     placeholder="Search"
                     placeHolderTextColor="#333"
                     value={search}
@@ -158,13 +133,60 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
                     onChangeText={(text) => setSearch(text)}
                     onSubmitEditing={updateResults}
                 />
-                */}
+        )
+        
+    }
+
+    const drop=()=>{
+        return(
+            <ModalDropdown
+                        options={type}    //下拉内容数组
+                        //style={styles.modal}    //按钮样式
+                        //dropdownStyle={[{height:32*type.length}]}    //下拉框样式
+                        //dropdownTextStyle={{fontSize:15}}    //下拉框文本样式
+                        //renderSeparator={_separator}    //下拉框文本分隔样式
+                        //adjustFrame={_adjustType}    //下拉框位置
+                        dropdownTextHighlightStyle={{color:'rgba(42, 130, 228, 1)'}}    //下拉框选中颜色
+                        //onDropdownWillShow={() => setTypeShow(false)}   //按下按钮显示按钮时触发 
+                        //onDropdownWillHide={() => setTypeShow(false)}    //当下拉按钮通过触摸按钮隐藏时触发
+                        //onSelect={_selectType}    //当选项行与选定的index 和 value 接触时触发
+                        //defaultValue={'Sort by: Key words'}
+                    >
+                      
+                       
+                    </ModalDropdown>
+
+
+
+
+
+        )
+
+
+
+    }
+
+
+ 
+
+    return (
+        <Container>
+            <View style={{paddingHorizontal: 10,flex:1}}>
+                {/*<View style={{marginTop: 15, marginBottom: 5}}>*/}
+                {/*    <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold', marginLeft: 7}}>Requests for you!</Text>*/}
+                {/*</View>*/}
+                
+               
                <FlatList
-                ListHeaderComponent={_createListHeader}
+                //ListHeaderComponent={_createListHeader}
+                refreshing={refreshing}
+                onRefresh={onRefresh}
                 data = {requests}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({item})=>{
+                renderItem={({item,index})=>{
                     return(
+                        <View>
+                        {index==0?Input():
                         <View style={{
                             display: item.hidden ? 'none' : 'flex',
                             flexDirection: 'row',
@@ -221,6 +243,8 @@ const RequestsForYou = ({route, navigation,RootStore }) => {
                                 <FontAwesome5 name={'video'} size={25} color="pink" />
                             </TouchableOpacity>
                         </View>
+                    </View>
+                }
                     </View>
                     )
                 }
