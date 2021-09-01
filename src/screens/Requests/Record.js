@@ -25,7 +25,8 @@ class Record extends PureComponent {
             progressStatus: 0.01,
             startTime:0,
             endTime:0,
-            duration:0
+            duration:0,
+            cameraType: RNCamera.Constants.Type.back
 
         }
     }
@@ -55,6 +56,13 @@ class Record extends PureComponent {
   });
     }
 
+    switchCamera() {
+        this.setState({
+            cameraType: (this.state.cameraType === RNCamera.Constants.Type.back) ?
+                RNCamera.Constants.Type.front : RNCamera.Constants.Type.back
+        })
+      }
+    
     async startRecording() {
         this.setState({recording: true});
         this.setState({startTime:Date.now()})
@@ -147,7 +155,7 @@ class Record extends PureComponent {
                         this.camera = ref;
                     }}
                     style={styles.preview}
-                    type={RNCamera.Constants.Type.back}
+                    type={this.state.cameraType}
                     flashMode={RNCamera.Constants.FlashMode.on}
                     //faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
                     androidCameraPermissionOptions={{
@@ -172,10 +180,19 @@ class Record extends PureComponent {
                     >
                     </ProgressBarAndroid>
                 </View>
-                <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
+                
+                <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'space-between' }}>
                     {button}
+                    <TouchableOpacity
+                        onPress={this.switchCamera.bind(this)}
+                        styles={styles.capture}
+                    >
+                        <Text style={{...styles.capture, backgroundColor: 'lightgreen', color: 'black'}}> Switch Camera </Text>
+                    </TouchableOpacity>   
                 </View>
-            </View>
+
+                </View>
+           
         );
     };
 }

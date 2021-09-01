@@ -5,7 +5,7 @@ import {
 	TouchableWithoutFeedback, 
 	Image,
 	TouchableOpacity,
-    Modal,
+    //Modal,
 	ScrollView,
 	FlatList
 } from 'react-native';
@@ -24,7 +24,7 @@ import {SERVER_ADDRESS} from '../../../data/address'
 import request from '../../util/request'
 import {inject,observer } from "mobx-react";
 import RNFetchBlob from 'rn-fetch-blob';
-//import Modal from "react-native-modal";
+import Modal from "react-native-modal";
 
 /*
 "post": {
@@ -289,9 +289,9 @@ const Post = (props) => {
 			{/*comment modal start*/}
 			<View style={styles.centeredView}>
 				<Modal
-					animationType={"slide"}
+					//animationType={"slide"}
 					//transparent={true}
-					isvisible={modal}
+					isVisible={modal}
 				>
 					<View style={styles.centeredView}>
 						<View style={styles.modalView}>

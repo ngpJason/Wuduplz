@@ -231,6 +231,7 @@ const Requests = ({route, navigation,RootStore}) => {
 									flexDirection: 'row',
 									alignItems: 'center',
 									justifyContent: 'space-between',
+									//justifyContent:'center',
 									marginVertical: 10,
 									marginBottom: 5,
 									height:100,
@@ -246,11 +247,13 @@ const Requests = ({route, navigation,RootStore}) => {
 											borderColor: '#333',
 										}}
 										source={{uri:SERVER_ADDRESS+item.img}} /> */}
+										
+									
 									<View style={{
-										width: '50%',
+										width: '60%',
 										flexDirection: 'row',
 										alignItems: 'center',
-										justifyContent: 'center'
+										//justifyContent: 'center'
 
 									}}>
 										<TouchableOpacity style={{paddingRight:9}} onPress={() => {
@@ -259,7 +262,6 @@ const Requests = ({route, navigation,RootStore}) => {
 											}} >
 											<FontAwesome5 name={'trash-alt'} size={22} color="pink" />
 										</TouchableOpacity>
-									
 										<View>
 											<Text style={{ fontWeight: 'bold' }}>{item.requestMessage}</Text>
 											<Text style={{ color: '#333' }}>{item.responseCount}</Text>
@@ -267,7 +269,7 @@ const Requests = ({route, navigation,RootStore}) => {
 										</View>
 									</View>
 								
-										
+									
 										{
 											index==0?<></>:
 											item.responses.length==0?	
@@ -281,6 +283,7 @@ const Requests = ({route, navigation,RootStore}) => {
 											
 
 										}
+									
 										
 			
 										</View>
