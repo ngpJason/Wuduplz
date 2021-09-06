@@ -101,7 +101,11 @@ const AddReques = ({ navigation,RootStore }) => {
 		
 			if(value==''){
 				Toast.info('please input the request')
-			}else{
+			}
+			else if(value.length>40){
+				Toast.info('The number of characters should be less than 40')
+			}
+			else{
 					
 					setSendIndicator(true)
 					setReceivingIndicator(true)
@@ -230,7 +234,7 @@ const AddReques = ({ navigation,RootStore }) => {
 	    <TextInput
 	      style={styles.textInput}
 		  placeholder="show me......."
-		  maxLength={100}
+		  maxLength={45}
 		  onBlur={Keyboard.dismiss}
 	      onChangeText={text => onChangeText(text)}
 	      value={value}

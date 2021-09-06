@@ -143,6 +143,7 @@ class loginView extends Component {
           underlineColorAndroid={'transparent'} keyboardType={'email-address'} 
           value={Email}
           onChangeText={this.EmailChangeText}
+          autoCapitalize='none'
           />
         </View>
         <View style={styles.inputView}>

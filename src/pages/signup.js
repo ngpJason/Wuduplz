@@ -214,7 +214,7 @@ const AddRequest = ({ navigation,RootStore }) => {
 
   const Start = async ()=>{
    
-      let code =await axios.get(`${SERVER_ADDRESS}/front-end/verifyUser/${email}/${verificationCode}`)
+      let code =await axios.get(`${SERVER_ADDRESS}/front-end/verifyUser/${email.toLowerCase()}/${verificationCode}`)
       var status=code.data.status
       var message = code.data.message
       var keywords = []
@@ -230,7 +230,7 @@ const AddRequest = ({ navigation,RootStore }) => {
       }
 
       var data = {
-        'Email':email,
+        'Email':email.toLowerCase(),
         'PassWord':password,
         'UserName':username,
         'City':city,
@@ -293,12 +293,13 @@ const AddRequest = ({ navigation,RootStore }) => {
         keyboardType={'email-address'}
         placeholder={'Your email'}
         value={email}
+        autoCapitalize='none'
       />
       <TouchableOpacity style={{paddingVertical:5,borderRadius:9,borderWidth:1,height:40,marginVertical:10,backgroundColor:'blue'}}
       onPress={async()=>{
         if(countDown==0){
         if(regEmail.test(email)){
-          let result = await request.get(`/sendCode/${email}`)
+          let result = await request.get(`/sendCode/${email.toLowerCase()}`)
           Toast.success('code has been sent')
           setCountDown(60)
           setCountDownIndicator(true)
@@ -345,7 +346,7 @@ const AddRequest = ({ navigation,RootStore }) => {
                   setVerifyMessageIndicator(true)
                   setLoadIndicator(true)
                   console.log('email is ',email,'text is ',text)
-                  let result =await axios.get(`${SERVER_ADDRESS}/front-end/verifyUser/${email}/${text}`)
+                  let result =await axios.get(`${SERVER_ADDRESS}/front-end/verifyUser/${email.toLowerCase()}/${text}`)
                   setCodeStatus(result.data.status)
                   setLoadIndicator(false)
                 }
@@ -353,6 +354,7 @@ const AddRequest = ({ navigation,RootStore }) => {
             }                
           } }
           keyboardType={'email-address'}
+          autoCapitalize='none'
           placeholder={'Verification Code'}
           onBlur={()=>{
             if(verificationCode=='')

@@ -389,7 +389,8 @@ const Post = (props) => {
 							/>	
 						</View>
 							<Text style={styles.handle}>{post.creator.username}</Text>
-							<Text style={styles.description}>{post.description}</Text>
+							{/*<Text style={styles.description}>{post.description}</Text>*/}
+							<Text style={styles.description}>{post.RequestName}</Text>
 
 							<View style={styles.songRow}>
 								<Entypo name={'users'} size={20} color='white'/>
