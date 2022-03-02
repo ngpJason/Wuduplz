@@ -2,16 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- Required with iOS 10 and higher -->
 	<key>NSCameraUsageDescription</key>
 	<string>"Wuduplz" is accessing camera</string>
-	<!-- Required with iOS 11 and higher: include this only if you are planning to use the camera roll -->
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>"Wuduplz" is accessing photo library</string>
-	<!-- Include this only if you are planning to use the camera roll -->
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>"Wuduplz" is accessing photo library</string>
-	<!-- Include this only if you are planning to use the microphone for video recording -->
 	<key>NSMicrophoneUsageDescription</key>
 	<string>"Wuduplz" is accessing microphone</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -50,7 +46,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
