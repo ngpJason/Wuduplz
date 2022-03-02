@@ -74,11 +74,8 @@ const AddRequest = ({ navigation,RootStore }) => {
 
   const [countDown,setCountDown]=React.useState(0)
 
-  const [showPassword, setShowPassword] = React.useState(false)
-
-  const [text, setText] = React.useState('');
-
   const [passwordVisible, setPasswordVisible] = React.useState(true);
+
   const [passwordVisibleSecond, setPasswordVisibleSecond] = React.useState(true);
 
 
@@ -665,7 +662,6 @@ const styles = StyleSheet.create({
     alignItems:'center',
     fontSize:14,
   },
-
 });
 
 
