@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View, 
   Text, 
-  TextInput,
   Dimensions,
   StyleSheet,
   TouchableOpacity,
@@ -12,6 +11,8 @@ import {
   ToastAndroid,
   ActivityIndicator,
 } from 'react-native';
+
+import { TextInput} from 'react-native-paper';
 import {inject,observer } from "mobx-react";
 import request from '../util/request'
 import Toast from '../util/Toast'
@@ -73,6 +74,9 @@ const AddRequest = ({ navigation,RootStore }) => {
 
   const [countDown,setCountDown]=React.useState(0)
 
+  const [passwordVisible, setPasswordVisible] = React.useState(true);
+
+  const [passwordVisibleSecond, setPasswordVisibleSecond] = React.useState(true);
 
 
 
@@ -283,7 +287,7 @@ const AddRequest = ({ navigation,RootStore }) => {
   return (
     <ScrollView>
 
-  <View style={{flex: 1, alignItems: 'center', justifyContent: 'center',alignSelf: 'stretch',paddingTop:45}}> 
+  <View style={{flex: 1, alignItems: 'center', justifyContent: 'center',alignSelf: 'stretch',paddingTop:45}}>
 
     <Text style={styles.step}> Email </Text>
     <View style={{flexDirection:'row'}}>
@@ -385,71 +389,71 @@ const AddRequest = ({ navigation,RootStore }) => {
       :<AntDesign name={'close'} size={25} color={'red'} />
       }</View>}
   </View>
-      
 
-    <Text style={styles.step}> Password </Text>
+    <Text style={styles.step}>Password</Text>
+    <View style={{flexDirection:'row'}}>
       <TextInput
         style={{ height: 40, borderColor: 'blue', borderWidth: 1, margin: 10, width: Dimensions.get('window').width - 30 }}
         onChangeText={text => onChangePassword(text)}
-        secureTextEntry={true}
+        secureTextEntry={passwordVisible}
         placeholder={'Set your password'}
         value={password}
-      />  
+      />
+      <TextInput.Icon style={{marginTop: 44, marginLeft: Dimensions.get('window').width*1.75}} name={passwordVisible ? "eye" : "eye-off"} onPress={() => setPasswordVisible(!passwordVisible)}/>
+    </View>
 
-    <Text style={styles.step}> Please type your Password again</Text>
-      <TextInput
-        style={{ height: 40, borderColor: 'blue', borderWidth: 1, margin: 10, width: Dimensions.get('window').width - 30 }}
-        onChangeText={async(text)=>{
-          onChangePassword1(text)
-          // if(passwordTime==0){
-          //   setPasswordTime(Date.now())
-          // }
+    <Text style={styles.step}>Please type your password again</Text>
+    <View style={{flexDirection:'row'}}>
+          <TextInput
+            style={{ height: 40, borderColor: 'blue', borderWidth: 1, margin: 10, width: Dimensions.get('window').width - 30 }}
+            onChangeText={async(text)=>{
+              onChangePassword1(text)
+              // if(passwordTime==0){
+              //   setPasswordTime(Date.now())
+              // }
 
-          //setPasswordTime(Date.now())
-          // if(cache.length!=0)
-          //   cache.pop()
-          // cache.push(Date.now())
-          // console.log(cache)
+              //setPasswordTime(Date.now())
+              // if(cache.length!=0)
+              //   cache.pop()
+              // cache.push(Date.now())
+              // console.log(cache)
 
-          // setTimeout(async()=>{
+              // setTimeout(async()=>{
+
+              //     //let result = await checkPassword(text)
+              //     if(Date.now()-cache[cache.length-1]>=2000){
+              //     console.log('Date now is ',Date.now(),'last change time is ',cache)
+              //     console.log('typed!')
+              //     }
+
+              // },2000)
+            }}
+            secureTextEntry={passwordVisibleSecond}
+            placeholder={'Confirm your password'}
+            onBlur={()=>{
+              if(password1=='')
+                setPasswordInfoIndicator(false)
+              else
+                setPasswordInfoIndicator(true)
+            }}
+            value={password1}
+          />
+          <TextInput.Icon style={{marginTop: 44, marginLeft: Dimensions.get('window').width*1.75}} name={passwordVisibleSecond ? "eye" : "eye-off"} onPress={() => setPasswordVisibleSecond(!passwordVisibleSecond)}/>
+        </View>
+          {passwordInfoIndicator&&
+              <View style={{alignSelf:'center'}}>{
+                password!=password1?
+                <View style={{marginRight: 3,flexDirection:'row',alignItems:'center'}}>
+                  <AntDesign  name={'closecircleo'} size={15} color={'red'} />
+                  <Text style={{color:'red',fontSize:10,width:'75%',marginLeft:10}}>incorrect password</Text>
+                </View>:
+                <View style={{marginRight: 3,flexDirection:'row',alignItems:'center'}}>
+                  <AntDesign  name={'checkcircleo'} size={15} color={'green'} />
+                  <Text style={{color:'green',fontSize:10,width:'75%',marginLeft:10}}>correct password</Text>
+                </View>
+
+          }</View>}
           
-          //     //let result = await checkPassword(text)
-          //     if(Date.now()-cache[cache.length-1]>=2000){
-          //     console.log('Date now is ',Date.now(),'last change time is ',cache)
-          //     console.log('typed!')
-          //     }
-            
-          // },2000)
-  
-          
-                  
-        } }
-        secureTextEntry={true}
-        placeholder={'reinput your password'}
-        onBlur={()=>{
-          if(password1=='')
-            setPasswordInfoIndicator(false)
-          else
-            setPasswordInfoIndicator(true)
-        }}
-        value={password1}
-      />  
-      {passwordInfoIndicator&&
-          <View style={{alignSelf:'center'}}>{
-            password!=password1?
-            <View style={{marginRight: 3,flexDirection:'row',alignItems:'center'}}>
-              <AntDesign  name={'closecircleo'} size={15} color={'red'} />
-              <Text style={{color:'red',fontSize:10,width:'75%',marginLeft:10}}>incorrect password</Text>
-            </View>:
-            <View style={{marginRight: 3,flexDirection:'row',alignItems:'center'}}>
-              <AntDesign  name={'checkcircleo'} size={15} color={'green'} />
-              <Text style={{color:'green',fontSize:10,width:'75%',marginLeft:10}}>correct password</Text>
-            </View>
-
-      }</View>}
- 
-    
-
     <Text style={styles.step}> Nick Name </Text>
       <TextInput
         style={{ height: 40, borderColor: 'blue', borderWidth: 1, margin: 10, width: Dimensions.get('window').width - 30 }}
